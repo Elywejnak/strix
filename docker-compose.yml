@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+
+  php:
+    container_name: php
+    build:
+      context: ./docker/php
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
+    volumes:
+      - .:/var/www:delegated
+    networks:
+      - network
+
+  mysql:
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: "strix"
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "3306:3306"
+    restart: always
+
+networks:
+  network:
+
+    
+      
+
